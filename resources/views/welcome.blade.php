@@ -7,7 +7,7 @@
             <tr>
                 <td width="10%"><label for="data_Name">Name:</label></td>
                 <td width="20%"><input type="text" class="form-control" id="data_Name" name="data_Name" /></td>
-                <td width="70%" align="right"><button type="button" class="btn btn-primary btn-circle"><b>?</b></button></td>
+                <td width="70%" align="right"><button type="button" class="btn btn-primary btn-circle" onclick="databaseHelp()"><b>?</b></button></td>
             </tr>
         </table>
     </div>
@@ -18,7 +18,7 @@
                 <td width="15%" align="center"><button type="button" class="btn btn-secondary tbl-button">table1</button></td>
                 <td width="75%"></td>
                 <td width="5%" align="left"><button type="button" class="btn btn-light2 btn-circle"><b>+</b></button></td>
-                <td width="5%" align="right"><button type="button" class="btn btn-primary btn-circle"><b>?</b></button></td>
+                <td width="5%" align="right"><button type="button" class="btn btn-primary btn-circle" onclick="tableTabHelp()"><b>?</b></button></td>
             </tr>
         </table>
     </div>
@@ -30,7 +30,7 @@
                 <td width="20%"><input type="text" class="form-control" id="table_Name" name="table_Name" value="table1" /></td>
                 <td width="60%"></td>
                 <td width="5%"><button type="button" class="btn btn-light2 btn-circle"><b>-</b></td>
-                <td width="5%" align="right"><button type="button" class="btn btn-primary btn-circle"><b>?</b></button></td>
+                <td width="5%" align="right"><button type="button" class="btn btn-primary btn-circle" onclick="fieldHelp()"><b>?</b></button></td>
             </tr>
         </table>
         <table width="100%" class="table">
@@ -76,7 +76,7 @@
                 <td></td>
             </tr>
         </table>
-        <div align="right"><button type="button" class="btn btn-primary btn-circle"><b>?</b></button></div>
+        <div align="right"><button type="button" class="btn btn-primary btn-circle" onclick="tableHelp()"><b>?</b></button></div>
         <br>
         <div class="scroll" style="overflow-x:auto; overflow-y: auto;">
             <table id="dtHorizontalVerticalExample" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
@@ -90,7 +90,7 @@
                         <td><input class="form-control" type="text" name="defaultfield" disabled></td>
                     </tr>
                     <tr>
-                        <td align="left"><button type="button" class="btn btn-light2 btn-circle"><b>+</b></button></td>
+                        <td align="left"><button type="button" class="btn btn-light2 btn-circle" onclick="tableHelp()"><b>+</b></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -103,7 +103,7 @@
                 <td width="30%"></td>
                 <td width="20%" align="left"><button type="button" class="btn btn-dark"><b>Generate</b></button></td>
                 <td width="20%" align="right"><button type="button" class="btn btn-dark" disabled><b>Download</b></button></td>
-                <td width="30%" align="right"><button type="button" class="btn btn-primary btn-circle"><b>?</b></button></td>
+                <td width="30%" align="right"><button type="button" class="btn btn-primary btn-circle" onclick="makeDatabaseHelp()"><b>?</b></button></td>
             </tr>
         </table>
     </div>
