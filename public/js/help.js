@@ -29,7 +29,7 @@ function fieldHelp()
 
 function tableHelp()
 {
-    alert("This area is where you add your data to the database. The data must follow the rules specified in the field definition.");
+    alert("This area is where you add your records to the database. The data must follow the rules specified in the field definition. Ensure that the field definition is final before inputting records as all records will be lost upon modification of the table structure.");
 }
 
 function makeDatabaseHelp()
