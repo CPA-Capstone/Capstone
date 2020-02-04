@@ -18,7 +18,7 @@ function fieldHelp()
     "   •Decimal is any number with a decimal. \n",
     "   •True/False is any field that is binary. \n",
     "   •Date is specific down to the day. (Must follow this format: YYYY-MM-DD)\n",
-    "   •DateTime is specific down to the second. \n",
+    "   •Date & Time is specific down to the second. ",
     "(Must follow this format: YYYY-MM-DD HH:MM:SS)\n",
     "c. Not null: prevents this field from being empty.\n", 
     "d. Auto increment: counts up by 1 starting from 1. Only useable with Integer data type.\n",
