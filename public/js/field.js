@@ -9,7 +9,7 @@ function addField(element)
 	row.innerHTML = '                <td><input type="text" class="form-control" id="field_Name" name="field_Name" value="field'.concat(fieldNumber, '" /></td>\n',
                 '<td align="center"><input type="checkbox" name="primary" onchange="checkPrimary(this);"></td>\n',
                 '<td>',
-                '    <select class="form-control" onchange="checkAuto(this);">',
+                '    <select class="form-control" onchange="checkAuto(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">',
                 '        <option value="NULL">--Select--</option>',
                 '        <option value="INT">Integer</option>',
                 '        <option value="TEXT">Text</option>',
@@ -95,8 +95,16 @@ function updateRecordLayout(table)
 
 			var value = select.options[select.selectedIndex].value;
 
-			html = html.concat('<td>', '<input class="');
-			recordHTML = recordHTML.concat('<td>', '<input class="');
+			if(foreign)
+			{
+				html = html.concat('<td>', '<select class="');
+				recordHTML = recordHTML.concat('<td>', '<select class="');
+			}
+			else
+			{
+				html = html.concat('<td>', '<input class="');
+				recordHTML = recordHTML.concat('<td>', '<input class="');
+			}
 
 			if(prime)
 			{
@@ -129,7 +137,38 @@ function updateRecordLayout(table)
 				recordHTML = recordHTML.concat('unique ');
 			}
 
-			if(value == 'NULL')
+			if(foreign)
+			{
+				var foreignVal = children[i].children[7].firstElementChild.value;
+
+				html = html.concat('related ');
+				recordHTML = recordHTML.concat('related ');
+
+				if(foreignVal == 'null')
+				{
+					html = html.concat('form-control" disabled>', '</td>');
+					recordHTML = recordHTML.concat('form-control" disabled>', '</td>');
+				}
+				else
+				{
+					relatedTable = document.getElementById('table'.concat(foreignVal));
+					relatedTable = relatedTable.lastElementChild;
+
+					relatedRows = relatedTable.children;
+
+					html = html.concat('form-control drop', foreignVal, '">');
+					recordHTML = recordHTML.concat('form-control drop', foreignVal, '">');
+
+					for(var j = 0; j < relatedRows.length-1; j++)
+					{
+						var element = relatedRows[j].firstElementChild.firstElementChild.value;
+
+						html = html.concat('<option value="', element, '">', element, '</option>');
+						recordHTML = recordHTML.concat('<option value="', element, '">', element, '</option>');
+					}
+				}	
+			}
+			else if(value == 'NULL')
 			{
 				html = html.concat('null form-control" type="text" name="disabledfield" disabled>', '</td>');
 				recordHTML = recordHTML.concat('null form-control" type="text" name="disabledfield" disabled>', '</td>');
@@ -217,9 +256,12 @@ function checkForeign(check)
 {
 	var value = check.checked;
 
+	var currentVal = 'null';
 	var relatedField = check.parentNode.nextElementSibling;
-
-	relatedField.innerHTML = "";
+	if(relatedField.firstElementChild)
+	{
+		currentVal = relatedField.firstElementChild.options[relatedField.firstElementChild.selectedIndex].value;
+	}
 
 	var dataSelect = check.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild;
 	var dataType = dataSelect.options[dataSelect.selectedIndex].value;
@@ -272,9 +314,24 @@ function checkForeign(check)
 			}
 		}
 
-		relatedField.append(related);
+		if(relatedField.innerHTML == "" || relatedField.firstElementChild.innerHTML != inner)
+		{
+			relatedField.innerHTML = "";
 
-		related.innerHTML = inner;
+			relatedField.append(related);
+
+			related.innerHTML = inner;
+			related.value = currentVal;
+
+			if(related.selectedIndex == -1)
+			{
+				related.value = 'null';
+			}
+		}
+	}
+	else
+	{
+		relatedField.innerHTML = "";
 	}
 }
 
@@ -304,6 +361,146 @@ function setAuto(row)
 			element.value = autoNum+1;
 
 			autoNum = 1;
+		}
+	}
+}
+
+function setRecord(table)
+{
+	table = table.lastChild;
+	children = table.children;
+
+	recordHTML = "";
+
+	for (var i = 1; i < children.length-1; i++)
+	{
+		if(children[i].style.display != 'none')
+		{
+			var select = children[i].childNodes[5].firstElementChild;
+			var prime = children[i].children[1].firstElementChild.checked;
+			var notNull = children[i].children[3].firstElementChild.checked;
+			var auto = children[i].children[4].firstElementChild.checked;
+			var unique = children[i].children[5].firstElementChild.checked;
+			var foreign = children[i].children[6].firstElementChild.checked;
+
+			var value = select.options[select.selectedIndex].value;
+
+			if(foreign)
+			{
+				recordHTML = recordHTML.concat('<td>', '<select class="');
+			}
+			else
+			{
+				recordHTML = recordHTML.concat('<td>', '<input class="');
+			}
+
+			if(prime)
+			{
+				recordHTML = recordHTML.concat('primary ');
+			}
+			if(notNull)
+			{
+				recordHTML = recordHTML.concat('notNull ');
+			}
+			if(auto)
+			{
+				recordHTML = recordHTML.concat('auto ');
+			}
+			if(unique)
+			{
+				recordHTML = recordHTML.concat('unique ');
+			}
+
+			if(foreign)
+			{
+				var foreignVal = children[i].children[7].firstElementChild.value;
+
+				recordHTML = recordHTML.concat('related ');
+
+				if(foreignVal == 'null')
+				{
+					recordHTML = recordHTML.concat('form-control" disabled>', '</td>');
+				}
+				else
+				{
+					relatedTable = document.getElementById('table'.concat(foreignVal));
+					relatedTable = relatedTable.lastElementChild;
+
+					relatedRows = relatedTable.children;
+
+					recordHTML = recordHTML.concat('form-control drop', foreignVal, '">');
+
+					for(var j = 0; j < relatedRows.length-1; j++)
+					{
+						var element = relatedRows[j].firstElementChild.firstElementChild.value;
+
+						recordHTML = recordHTML.concat('<option value="', element, '">', element, '</option>');
+					}
+				}	
+			}
+			else if(value == 'NULL')
+			{
+				recordHTML = recordHTML.concat('null form-control" type="text" name="disabledfield" disabled>', '</td>');
+			}
+			else if(value == 'INT')
+			{
+				recordHTML = recordHTML.concat('int form-control" type="text" name="integerfield">', '</td>');
+			}
+			else if(value == 'TEXT')
+			{
+				recordHTML = recordHTML.concat('text form-control" type="text" name="textfield">', '</td>');
+			}
+			else if(value == 'REAL')
+			{
+				recordHTML = recordHTML.concat('decimal form-control" type="text" name="decimalield">', '</td>');
+			}
+			else if(value == 'BOOLEAN')
+			{
+				recordHTML = recordHTML.concat('bool" type="checkbox" name="booleanfield">', '</td>');
+			}
+			else if(value == 'DATE')
+			{
+				recordHTML = recordHTML.concat('date form-control" type="text" name="datefield">', '</td>');
+			}
+			else if(value == 'DATETIME')
+			{
+				recordHTML = recordHTML.concat('datetime form-control" type="text" name="datetimefield">', '</td>');
+			}
+		}
+	}
+	recordHTML = recordHTML.concat('<td align="right"><button type="button" class="btn btn-light2 btn-circle" onclick="removeRecord(this)"><b>-</b></button></td>');
+}
+
+function setDrops()
+{
+	drops = document.getElementsByClassName('drop'.concat(currentTable));
+
+	for(var i = 0; i < drops.length; i++)
+	{
+		currentVal = drops[i].value;
+		drops[i].innerHTML = "";
+
+		relatedTable = document.getElementById('table'.concat(currentTable));
+		relatedTable = relatedTable.lastElementChild;
+
+		relatedRows = relatedTable.children;
+
+		var inner = "";
+
+		for(var j = 0; j < relatedRows.length-1; j++)
+		{
+			var element = relatedRows[j].firstElementChild.firstElementChild.value;
+
+			inner = inner.concat('<option value="', element, '">', element, '</option>');
+		}
+
+		drops[i].innerHTML = inner;
+
+		drops[i].value = currentVal;
+
+		if(drops[i].selectedIndex == -1)
+		{
+			drops[i].selectedIndex = 0;
 		}
 	}
 }

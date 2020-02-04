@@ -14,7 +14,7 @@ function addTable()
 	row.innerHTML = '                <td><input type="text" class="form-control" id="field_Name" name="field_Name" value="field'.concat(fieldNumber, '" /></td>\n',
                 '<td align="center"><input type="checkbox" name="primary" onchange="checkPrimary(this);" checked disabled></td>\n',
                 '<td>',
-                '    <select class="form-control" onchange="checkAuto(this);">',
+                '    <select class="form-control" onchange="checkAuto(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">',
                 '        <option value="NULL">--Select--</option>',
                 '        <option value="INT">Integer</option>',
                 '        <option value="TEXT">Text</option>',
@@ -86,22 +86,32 @@ function addTable()
 
 function removeTable()
 {
-	if(confirm("Are you sure?\n(All fields and records in this table will be lost permanently)"))
+	if(document.getElementsByClassName('drop'.concat(currentTable)).length > 0)
 	{
-		current = document.getElementsByClassName('tbl'.concat(currentTable));
-
-		for(var i = 0; i < current.length; i++)
+		alert('There are table(s) that have a foreign key related to this table. Please remove this relationship and try again.');
+	}
+	else
+	{
+		if(confirm("Are you sure?\n(All fields and records in this table will be lost permanently)"))
 		{
-			current[i].remove();
-		}
-		document.getElementById('tbl'.concat(currentTable, '-button')).remove();
+			current = document.getElementsByClassName('tbl'.concat(currentTable));
+			length = current.length
 
-		switchTable(1);
+			for(var i = 0; i < length; i++)
+			{
+				current[0].remove();
+			}
+			document.getElementById('tbl'.concat(currentTable, '-button')).remove();
+
+			switchTable(1);
+		}
 	}
 }
 
 function switchTable(tableNum, isNew)
 {
+	setDrops();
+
 	current = document.getElementsByClassName('tbl'.concat(currentTable));
 	switched = document.getElementsByClassName('tbl'.concat(tableNum));
 
@@ -134,13 +144,18 @@ function switchTable(tableNum, isNew)
 
 	currentTable = tableNum;
 
+	setRecord(document.getElementById('field'));
+
 	if(!isNew)
 	{
 		keys = document.getElementsByClassName('foreignKey');
 
 		for(var i = 0; i < keys.length; i++)
 		{
-			checkForeign(keys[i]);
+			if(keys[i].parentNode.parentNode.classList.contains('tbl'.concat(currentTable)))
+			{
+				checkForeign(keys[i]);
+			}
 		}
 	}
 }
