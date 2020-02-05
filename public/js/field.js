@@ -326,6 +326,8 @@ function checkForeign(check)
 			if(related.selectedIndex == -1)
 			{
 				related.value = 'null';
+
+				updateRecordLayout(document.getElementById('field'));
 			}
 		}
 	}

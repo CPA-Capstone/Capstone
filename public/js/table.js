@@ -95,7 +95,7 @@ function removeTable()
 		if(confirm("Are you sure?\n(All fields and records in this table will be lost permanently)"))
 		{
 			current = document.getElementsByClassName('tbl'.concat(currentTable));
-			length = current.length
+			length = current.length;
 
 			for(var i = 0; i < length; i++)
 			{
