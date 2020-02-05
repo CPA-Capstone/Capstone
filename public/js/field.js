@@ -224,7 +224,7 @@ function checkAuto(select)
 
 	var checkbox = select.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.firstChild;
 
-	if(value == 'INT')
+	if(value == 'INT' && !select.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.checked)
 	{
 		checkbox.removeAttribute('disabled');
 	}
@@ -256,6 +256,8 @@ function checkForeign(check)
 {
 	var value = check.checked;
 
+	var auto = check.parentNode.previousElementSibling.previousElementSibling.firstElementChild;
+
 	var currentVal = 'null';
 	var relatedField = check.parentNode.nextElementSibling;
 	if(relatedField.firstElementChild)
@@ -268,6 +270,9 @@ function checkForeign(check)
 
 	if(value)
 	{
+		auto.setAttribute('disabled', 'disabled');
+		auto.checked = false;
+
 		related = document.createElement("select");
 		related.setAttribute('class', 'form-control');
 
@@ -334,6 +339,11 @@ function checkForeign(check)
 	else
 	{
 		relatedField.innerHTML = "";
+
+		if(auto.parentNode.previousElementSibling.previousElementSibling.firstElementChild.value == 'INT')
+		{
+			auto.removeAttribute('disabled');
+		}
 	}
 }
 
