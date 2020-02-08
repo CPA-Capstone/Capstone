@@ -1,7 +1,7 @@
 @extends ('layouts.layout')
 
 @section ('content')
-
+<div id="content" onchange="validation()">
     <div class="container-fluid name-div">
         <table width="100%">
             <tr>
@@ -86,7 +86,7 @@
         <br>
 
         <center>Table Records</center>
-        <div id="records" class="scroll" style="overflow-x:auto; overflow-y: auto;">
+        <div id="records" class="scroll" style="overflow-x:auto; overflow-y: auto;" onchange="setDrops();">
             <table id="table1" class="table table-bordered table-sm tbl1 single" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -95,10 +95,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input class="form-control" type="text" name="defaultfield" disabled></td>
-                        <td></td>
-                    </tr>
                     <tr id="recordAdd">
                         <td align="left"><button type="button" class="btn btn-light2 btn-circle" onclick="addRecord(this)"><b>+</b></button></td>
                         <td></td>
@@ -112,12 +108,13 @@
         <table width="100%">
             <tr>
                 <td width="30%"></td>
-                <td width="20%" align="left"><button type="button" class="btn btn-blue"><b>Generate</b></button></td>
-                <td width="20%" align="right"><button type="button" class="btn btn-blue" disabled><b>Download</b></button></td>
+                <td width="20%" align="left"><button id="btn_generate" type="button" class="btn btn-blue" disabled=""><b>Generate</b></button></td>
+                <td width="20%" align="right"><button id="btn_download" type="button" class="btn btn-blue" disabled><b>Download</b></button></td>
                 <td width="30%" align="right"><button type="button" class="btn btn-info btn-circle" onclick="makeDatabaseHelp()"><b>?</b></button></td>
             </tr>
         </table>
     </div>
     <br>
+</div>
 
 @endsection
