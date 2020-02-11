@@ -230,3 +230,8 @@ h6, .h6 {
 .record-head {
   min-width: 250px;
 }
+
+.error {
+  color: red;
+  font-size: 12px;
+}

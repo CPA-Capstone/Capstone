@@ -1,10 +1,23 @@
 function validation() 
 {
+	var errors = document.getElementsByClassName('error');
+
+	errLength = errors.length;
+
+	for(var i = 0; i < errLength; i++)
+	{
+		errors[0].previousElementSibling.remove();
+
+		errors[0].remove();
+	}
+
 	var valid = true;
 
 	generate = document.getElementById('btn_generate');
 
 	var element = document.getElementById('content');
+
+	var errorMessage = "";
 
 	element = element.firstElementChild.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
 
@@ -12,7 +25,8 @@ function validation()
 	{
 		valid = false;
 
-		alert("You must enter a database name");
+		element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Your database needs a name</p>');
+	
 	}
 	else if(!isAlphaNumeric(element.value))
 	{
@@ -21,7 +35,7 @@ function validation()
 		alert("Database Name must be alphanumeric");
 	}
 
-	element = element.parentNode.parentNode.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.children[1];
+	element = document.getElementById('tblName');
 
 	var tableNames = element.children;
 
@@ -262,4 +276,14 @@ function isUniquePrimary(text, array)
 	}
 
 	return returnVal;
+}
+
+function showErrors(value){
+
+	if (errorMessage != "")
+	{
+		
+		
+	}
+	
 }

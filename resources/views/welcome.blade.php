@@ -2,15 +2,19 @@
 
 @section ('content')
 <div id="content" onchange="validation()">
+
+
     <div class="container-fluid name-div">
         <table width="100%">
             <tr>
                 <td width="10%"><label for="data_Name">Database Name:</label></td>
-                <td width="20%"><input type="text" class="form-control" id="data_Name" name="data_Name" /></td>
-                <td width="70%" align="right"></td>
+                <td width="20%"><input type="text" class="form-control" id="data_Name" name="data_Name"/></td>
+                <td width="50%" align="right"></td>
             </tr>
+          
         </table>
     </div>
+    
     <br>
 
     <br>
@@ -106,14 +110,18 @@
 
     <div class="container-fluid name-div">
         <table width="100%">
+        <div id="errors" onblur="showErrors()">
             <tr>
                 <td width="30%"></td>
                 <td width="20%" align="left"><button id="btn_generate" type="button" class="btn btn-blue" disabled=""><b>Generate</b></button></td>
                 <td width="20%" align="right"><button id="btn_download" type="button" class="btn btn-blue" disabled><b>Download</b></button></td>
                 <td width="30%" align="right"><button type="button" class="btn btn-info btn-circle" onclick="makeDatabaseHelp()"><b>?</b></button></td>
             </tr>
+         </div>            
+
         </table>
     </div>
+
     <br>
 </div>
 

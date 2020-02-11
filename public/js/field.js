@@ -4,6 +4,7 @@ function addField(element)
 	child = document.getElementById('buttonRow');
 
 	row = document.createElement("tr");
+	
 	row.setAttribute('id', 'fld'.concat(fieldNumber));
 	row.setAttribute('class', 'tbl'.concat(currentTable));
 	row.innerHTML = '                <td><input type="text" class="form-control" id="field_Name" name="field_Name" value="field'.concat(fieldNumber, '" /></td>\n',
@@ -25,14 +26,19 @@ function addField(element)
                 '<td align="center"><input class="foreignKey" type="checkbox" name="foreign" onchange="checkForeign(this);"></td>\n',
                 '<td></td>\n',
                 '<td><button type="button" class="btn btn-light2 btn-circle" onclick="removeField(this)"><b>-</b></button></td>\n'
-                );
-
+				);
 	table.insertBefore(row, child);
 	fieldNumber++;
 
+	$(row).fadeOut(0);
+	$(row).fadeIn("slow");
+	
+
 	table = document.getElementById('field');
 	updateRecordLayout(table);
+	
 }
+
 
 function addRecord(element)
 {
@@ -230,6 +236,8 @@ function updateRecordLayout(table)
 	recordHTML = recordHTML.concat('<td align="right"><button type="button" class="btn btn-light2 btn-circle" onclick="removeRecord(this)"><b>-</b></button></td>');
 
 	document.getElementById('table'.concat(currentTable)).innerHTML = html;
+	
+		
 }
 
 function checkAuto(select)
