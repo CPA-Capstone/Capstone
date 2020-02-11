@@ -1,7 +1,7 @@
 @extends ('layouts.layout')
 
 @section ('content')
-<div id="content" onchange="validation()">
+<div id="content" onchange="validation();">
     <div class="container-fluid name-div">
         <table width="100%">
             <tr>
@@ -37,7 +37,7 @@
             </tr>
         </table>
         <table id="field" width="100%" class="table" onchange="updateRecordLayout(this);">
-            <caption class="fields">Table Fields</caption>
+            <caption class="fields"><h4>Table Fields</h4></caption>
             <tr>
                 <th>Field Name</th>
                 <th>Primary Key</th>
@@ -85,7 +85,7 @@
         <div align="right"><button type="button" class="btn btn-info btn-circle" onclick="tableHelp()"><b>?</b></button></div>
         <br>
 
-        <center>Table Records</center>
+        <center><h5>Table Records</h5></center>
         <div id="records" class="scroll" style="overflow-x:auto; overflow-y: auto;" onchange="setDrops();">
             <table id="table1" class="table table-bordered table-sm tbl1 single" cellspacing="0" width="100%">
                 <thead>
