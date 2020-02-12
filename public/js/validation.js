@@ -11,13 +11,23 @@ function validation()
 		errors[0].remove();
 	}
 
+	errors = document.getElementsByClassName('btn-danger');
+
+	errLength = errors.length;
+
+	for(var i = 0; i < errLength; i++)
+	{
+		errors[0].classList.remove('btn-danger');
+	}
+
 	var valid = true;
 
 	generate = document.getElementById('btn_generate');
 
 	var element = document.getElementById('content');
 
-	var errorMessage = "";
+	var lineBreak;
+	var pargraph;
 
 	element = element.firstElementChild.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
 
@@ -25,33 +35,74 @@ function validation()
 	{
 		valid = false;
 
-		element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Your database needs a name</p>');
+		lineBreak = document.createElement('br');
+		pargraph = document.createElement('p');
+
+
+		pargraph.setAttribute('class', 'error');
+		element.parentNode.appendChild(lineBreak);
+		element.parentNode.appendChild(pargraph);
+		pargraph.innerText = 'Your database needs a name';
+
+		//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Your database needs a name</p>');
 	
 	}
 	else if(!isAlphaNumeric(element.value))
 	{
 		valid = false;
+		
+		lineBreak = document.createElement('br');
+		pargraph = document.createElement('p');
 
-		alert("Database Name must be alphanumeric");
+
+		pargraph.setAttribute('class', 'error');
+		element.parentNode.appendChild(lineBreak);
+		element.parentNode.appendChild(pargraph);
+		pargraph.innerText = 'Database Name must be alphanumeric';
+		//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Database Name must be alphanumeric</p>');
 	}
 
 	element = document.getElementById('tblName');
 
 	var tableNames = element.children;
 
-	for(var i = 0; i < tableNames.length; i++)
+	tableLength = tableNames.length;
+
+	for(var i = 0; i < tableLength; i++)
 	{
+		tableNum = tableNames[i].classList[tableNames[i].classList.length-1].substring(3);
+
 		if(tableNames[i].value == "")
 		{
 			valid = false;
 
-			alert("You must enter a table name");
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				tableNames[i].parentNode.appendChild(lineBreak);
+				tableNames[i].parentNode.appendChild(pargraph);
+				pargraph.innerText = 'You must enter a table name';
+
+				//tableNames[i].parentNode.innerHTML = tableNames[i].parentNode.innerHTML.concat('<br/><p class="error">You must enter a table name');
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+
+				//tab.parentNode.innerHTML = tab.parentNode.innerHTML.concat('<br/><p class="error">You must enter a table name');
+			}
 		}
 		else if(!isAlphaNumeric(tableNames[i].value))
 		{
 			valid = false;
 
-			alert("Table Name must be alphanumeric");
+			tableNames[i].parentNode.innerHTML = tableNames[i].parentNode.innerHTML.concat('<br/><p class="error">"Table Name must be alphanumeric');
 		}
 	}
 
@@ -69,19 +120,19 @@ function validation()
 		{
 			valid = false;
 
-			alert("You must enter a field name");
+			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">You must enter a field name');
 		}
 		else if(!isAlphaNumeric(fieldName))
 		{
 			valid = false;
 
-			alert("Field Name must be alphanumeric");
+			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Field Name must be alphanumeric');
 		}
 		else if(!isUniqueField(fieldName, names, tableNum))
 		{
 			valid = false;
 
-			alert("Field names must be unique within their table");
+			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Field names must be unique within their table');
 		}
 
 		names.push([tableNum, fieldName]);
@@ -94,7 +145,7 @@ function validation()
 		{
 			valid = false;
 
-			alert('A datatype must be selected');
+			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">A datatype must be selected');
 		}
 
 		var foreign = fields[i].children[6].firstElementChild.checked;
@@ -107,7 +158,7 @@ function validation()
 			{
 				valid = false;
 
-				alert('A foreign key must be selected');
+				//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">A foreign key must be selected');
 			}
 		}
 	}
@@ -143,25 +194,26 @@ function validation()
 				{
 					valid = false;
 
-					alert('Record must be an Integer (Whole Number)');
+					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be an Integer (Whole Number)');
 				}
 				else if(input.classList.contains('decimal') && !/^\d+\.\d+$/.test(input.value) && input.value != '')
 				{
 					valid = false;
 
-					alert('Record must be a Decimal');
+					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be a Decimal');
 				}
 				else if(input.classList.contains('date') && !/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(input.value) && input.value != '')
 				{
 					valid = false;
+					
 
-					alert('Record must be a date (YYYY-MM-DD)');	
+					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be a date (YYYY-MM-DD)');	
 				}
 				else if(input.classList.contains('datetime') && !/\d{4}-[01]\d-[0-3]\d [0-2]\d:[0-5]\d:[0-5]\d/.test(input.value) && input.value != '')
 				{
 					valid = false;
 
-					alert('Record must have a date & time (YYYY-MM-DD HH:MM:SS)');	
+					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must have a date & time (YYYY-MM-DD HH:MM:SS)');	
 				}
 
 				if(input.classList.contains('related'))
@@ -170,7 +222,7 @@ function validation()
 					{
 						valid = false;
 
-						alert('Record cannot be null');
+						//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record cannot be null');
 					}
 				}
 				else
@@ -179,7 +231,7 @@ function validation()
 					{
 						valid = false;
 
-						alert('Record cannot be null');
+						//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record cannot be null');
 					}
 				}
 
@@ -187,7 +239,7 @@ function validation()
 				{
 					valid = false;
 
-					alert('Record must be unique');
+					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be unique');
 				}
 
 				uniques[k].push(input.value);
@@ -202,7 +254,7 @@ function validation()
 			{
 				valid = false;
 
-				alert('Primary Key must be unique');
+				//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Primary Key must be unique');
 			}
 		}
 	}
@@ -231,6 +283,21 @@ function isAlphaNumeric(str)
     }
   }
   return returnVal;
+}
+
+function isUniqueTable(text, array)
+{
+	var returnVal = true;
+
+	for(var i = 0; i < array.length; i++)
+	{
+		if(array[i] == text)
+		{
+			returnVal = false;
+		}
+	}
+
+	return returnVal;
 }
 
 function isUniqueField(text, array, table) 
