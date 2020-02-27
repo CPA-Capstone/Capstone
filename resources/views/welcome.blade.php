@@ -55,7 +55,7 @@
                 <td><input type="text" class="form-control" id="field_Name" name="field_Name" value="field1" /></td>
                 <td align="center"><input type="checkbox" name="primary" checked disabled onchange="checkPrimary(this);"></td>
                 <td>
-                    <select class="form-control" onchange="checkAuto(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">
+                    <select class="form-control" onchange="checkAuto(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild); checkBoolean(this)">
                         <option value="NULL">--Select--</option>
                         <option value="INT">Integer</option>
                         <option value="TEXT">Text</option>
