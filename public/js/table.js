@@ -1,6 +1,8 @@
 function updateTableName(table, value)
 {
 	document.getElementById(table.concat('-button')).innerHTML = value;
+
+	validation();
 }
 
 function addTable()
@@ -82,6 +84,8 @@ function addTable()
 
 	table = document.getElementById('field');
 	updateRecordLayout(table);
+
+	validation();
 }
 
 function removeTable()
@@ -106,6 +110,8 @@ function removeTable()
 			switchTable(1);
 		}
 	}
+
+	validation();
 }
 
 function switchTable(tableNum, isNew)
@@ -158,4 +164,6 @@ function switchTable(tableNum, isNew)
 			}
 		}
 	}
+
+	//validation();
 }

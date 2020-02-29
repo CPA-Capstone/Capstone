@@ -111,8 +111,13 @@
         <div id="errors" onblur="showErrors()">
             <tr>
                 <td width="30%"></td>
-                <td width="20%" align="left"><button id="btn_generate" type="button" class="btn btn-blue" disabled=""><b>Generate</b></button></td>
-                <td width="20%" align="right"><button id="btn_download" type="button" class="btn btn-blue" disabled><b>Download</b></button></td>
+                <td width="20%" align="left"><button id="btn_generate" type="button" class="btn btn-blue" disabled="" onclick="generateSQL();"><b>Generate</b></button></td>
+                <form>
+                    <td width="20%" align="right">
+                        <textarea id="sql"></textarea>
+                        <button id="btn_download" type="button" class="btn btn-blue" disabled><b>Download</b></button>
+                    </td>
+                </form>
                 <td width="30%" align="right"><button type="button" class="btn btn-info btn-circle" onclick="makeDatabaseHelp()"><b>?</b></button></td>
             </tr>
          </div>            

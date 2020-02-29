@@ -36,7 +36,8 @@ function addField(element)
 
 	table = document.getElementById('field');
 	updateRecordLayout(table);
-	
+
+	validation();
 }
 
 
@@ -53,6 +54,8 @@ function addRecord(element)
 	setAuto(row);
 
 	setDrops();
+
+	validation();
 }
 
 function removeField(element)
@@ -62,6 +65,8 @@ function removeField(element)
 	row.remove();
 	table = document.getElementById('field');
 	updateRecordLayout(table);
+
+	validation();
 }
 
 function removeRecord(element)
@@ -71,6 +76,8 @@ function removeRecord(element)
 	row.remove();
 
 	setDrops();
+
+	validation();
 }
 
 function updateRecordLayout(table)
@@ -237,7 +244,7 @@ function updateRecordLayout(table)
 
 	document.getElementById('table'.concat(currentTable)).innerHTML = html;
 	
-		
+	//validation();
 }
 
 function checkAuto(select)
@@ -255,6 +262,8 @@ function checkAuto(select)
 		checkbox.checked = false;
 		checkbox.setAttribute('disabled', 'disabled');
 	}
+
+	validation();
 }
 
 function checkPrimary(check)
@@ -272,6 +281,8 @@ function checkPrimary(check)
 	{
 		nullBox.removeAttribute('disabled');
 	}
+
+	validation();
 }
 
 function checkForeign(check)
@@ -367,6 +378,8 @@ function checkForeign(check)
 			auto.removeAttribute('disabled');
 		}
 	}
+
+	//validation();
 }
 
 function setAuto(row)
@@ -397,6 +410,8 @@ function setAuto(row)
 			autoNum = 1;
 		}
 	}
+
+	validation();
 }
 
 function setRecord(table)
@@ -503,6 +518,8 @@ function setRecord(table)
 		}
 	}
 	recordHTML = recordHTML.concat('<td align="right"><button type="button" class="btn btn-light2 btn-circle" onclick="removeRecord(this)"><b>-</b></button></td>');
+
+	//validation();
 }
 
 function setDrops()
@@ -537,4 +554,6 @@ function setDrops()
 			drops[i].selectedIndex = 0;
 		}
 	}
+
+	//validation();
 }
