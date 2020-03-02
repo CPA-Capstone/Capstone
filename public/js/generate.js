@@ -11,7 +11,7 @@ function generateSQL()
 
 	for(var i = 0; i < tabs.length; i++)
 	{
-		tableNum = tabs[i].id.substring(3, 4);
+		tableNum = tabs[i].id.substring(3, tabs[i].id.length-7);
 		table = document.getElementById('table'.concat(tableNum));
 
 		sql.value += 'CREATE TABLE "' + names[i].value + '" (\n';
