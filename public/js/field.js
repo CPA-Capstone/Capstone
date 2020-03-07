@@ -10,7 +10,7 @@ function addField(element)
 	row.innerHTML = '                <td><input type="text" class="form-control" id="field_Name" name="field_Name" value="field'.concat(fieldNumber, '" /></td>\n',
                 '<td align="center"><input type="checkbox" name="primary" onchange="checkPrimary(this);"></td>\n',
                 '<td>',
-                '    <select class="form-control" onchange="checkAuto(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">',
+                '    <select class="form-control" onchange="checkAuto(this); checkBool(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">',
                 '        <option value="NULL">--Select--</option>',
                 '        <option value="INT">Integer</option>',
                 '        <option value="TEXT">Text</option>',
@@ -266,6 +266,49 @@ function checkAuto(select)
 	validation();
 }
 
+function checkBool(select)
+{
+	var value = select.options[select.selectedIndex].value;
+
+	var checkbox = select.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild;
+
+	if(value != 'BOOLEAN')
+	{
+		checkbox.removeAttribute('disabled');
+	}
+	else 
+	{
+		checkbox.checked = false;
+		checkbox.setAttribute('disabled', 'disabled');
+	}
+
+	var checkbox = select.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild;
+
+	if(value != 'BOOLEAN')
+	{
+		checkbox.removeAttribute('disabled');
+	}
+	else 
+	{
+		checkbox.checked = false;
+		checkbox.setAttribute('disabled', 'disabled');
+	}
+
+	var checkbox = select.parentNode.nextElementSibling.firstElementChild;
+
+	if(value == 'BOOLEAN' || select.parentNode.previousElementSibling.firstElementChild.checked)
+	{
+		checkbox.setAttribute('disabled', 'disabled');
+		checkbox.checked = true;
+	}
+	else 
+	{
+		checkbox.removeAttribute('disabled');
+	}
+
+	validation();
+}
+
 function checkPrimary(check)
 {
 	var value = check.checked;
@@ -407,7 +450,7 @@ function setAuto(row)
 
 			element.value = autoNum+1;
 
-			autoNum = 1;
+			autoNum = 0;
 		}
 	}
 

@@ -16,7 +16,7 @@ function addTable()
 	row.innerHTML = '                <td><input type="text" class="form-control" id="field_Name" name="field_Name" value="field'.concat(fieldNumber, '" /></td>\n',
                 '<td align="center"><input type="checkbox" name="primary" onchange="checkPrimary(this);" checked disabled></td>\n',
                 '<td>',
-                '    <select class="form-control" onchange="checkAuto(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">',
+                '    <select class="form-control" onchange="checkAuto(this); checkBool(this); checkForeign(this.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild);">',
                 '        <option value="NULL">--Select--</option>',
                 '        <option value="INT">Integer</option>',
                 '        <option value="TEXT">Text</option>',

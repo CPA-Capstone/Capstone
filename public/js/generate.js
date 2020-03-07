@@ -37,6 +37,11 @@ function generateSQL()
 
 				sql.value += '"' + fields[j].firstElementChild.firstElementChild.value + '" ' + fields[j].children[2].firstElementChild.value;
 
+				if(fields[j].children[2].firstElementChild.value == 'INT')
+				{
+					sql.value += 'EGER'
+				}
+
 				if(fields[j].children[1].firstElementChild.checked)
 				{
 					if(table.classList[table.classList.length-1] == 'single')
@@ -49,13 +54,18 @@ function generateSQL()
 
 						if(compoundString == "")
 						{
-							compoundString += fields[j].firstElementChild.firstElementChild.value;
+							compoundString += '"' + fields[j].firstElementChild.firstElementChild.value + '"';
 						}
 						else
 						{
-							compoundString += ',' + fields[j].firstElementChild.firstElementChild.value;
+							compoundString += ',"' + fields[j].firstElementChild.firstElementChild.value + '"';
 						}
 					}
+				}
+
+				if(fields[j].children[1].firstElementChild.checked && fields[j].children[4].firstElementChild.checked)
+				{
+					sql.value += ' AUTOINCREMENT';
 				}
 
 				if(fields[j].children[3].firstElementChild.checked)
@@ -118,7 +128,7 @@ function generateSQL()
 
 				values = tuples[j].children;
 
-				if(values[0].firstElementChild.type == 'text')
+				if(values[0].firstElementChild.type == 'text' || values[0].firstElementChild.nodeName == 'SELECT')
 				{
 					sql.value += '("' + values[0].firstElementChild.value + '"';
 				}
@@ -129,7 +139,7 @@ function generateSQL()
 
 				for(var k = 1; k < values.length-1; k++)
 				{
-					if(values[k].firstElementChild.type == 'text')
+					if(values[k].firstElementChild.type == 'text' || values[k].firstElementChild.nodeName == 'SELECT')
 					{
 						sql.value += ',"' + values[k].firstElementChild.value + '"';
 					}
@@ -145,6 +155,15 @@ function generateSQL()
 			sql.value += ';'
 		}
 	}
+
+	download = document.getElementById('btn_download');
+	
+	name = document.getElementById('data_Name').value;
+	dbName = document.getElementById('DBname');
+
+	dbName.value = name;
+
+	download.removeAttribute('disabled');
 }
 
 function hasRecords(table)
