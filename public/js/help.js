@@ -5,7 +5,7 @@ function databaseHelp()
 
 function tableTabHelp()
 {
-    alert("This is how you add new tables and switch between existing tables.");
+    alert("To add enw tables click the '+' buttonhere. Change tables by clicking on the name of the table you wish to view. If there are validation errors present in a table, the button will be red.");
 }
 
 function fieldHelp()

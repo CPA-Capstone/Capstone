@@ -19,7 +19,7 @@
     <div class="container-fluid table-tab">
         <table width="100%">
             <tr>
-                <td id="tabs" width="90%"><button type="button" id="tbl1-button" class="btn btn-secondary tbl-button" disabled onclick="switchTable(1, false)">table1</button></td>
+                <td id="tabs" width="90%"><button type="button" id="tbl1-button" class="btn btn-secondary tbl-button" disabled onclick="switchTable(1, false); validation();">table1</button></td>
                 <td width="5%" align="left"><button type="button" class="btn btn-light2 btn-circle" onclick="addTable()"><b>+</b></button></td>
                 <td width="5%" align="right"><button type="button" class="btn btn-info btn-circle" onclick="tableTabHelp()"><b>?</b></button></td>
             </tr>

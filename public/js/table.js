@@ -62,7 +62,7 @@ function addTable()
 	button.setAttribute('type', 'button');
 	button.setAttribute('id', 'tbl'.concat(tableNumber, '-button'));
 	button.setAttribute('class', 'btn btn-secondary tbl-button');
-	button.setAttribute('onclick', 'switchTable('.concat(tableNumber, ', false)'));
+	button.setAttribute('onclick', 'switchTable('.concat(tableNumber, ', false); validation();'));
 	button.innerHTML = 'table'.concat(tableNumber);
 
 	tab = document.getElementById('tabs');

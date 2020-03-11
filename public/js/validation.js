@@ -42,10 +42,7 @@ function validation()
 		pargraph.setAttribute('class', 'error');
 		element.parentNode.appendChild(lineBreak);
 		element.parentNode.appendChild(pargraph);
-		pargraph.innerText = 'Your database needs a name';
-
-		//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Your database needs a name</p>');
-	
+		pargraph.innerText = 'Your database needs a name';	
 	}
 	else if(!isAlphaNumeric(element.value))
 	{
@@ -59,12 +56,13 @@ function validation()
 		element.parentNode.appendChild(lineBreak);
 		element.parentNode.appendChild(pargraph);
 		pargraph.innerText = 'Database Name must be alphanumeric';
-		//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Database Name must be alphanumeric</p>');
 	}
 
 	element = document.getElementById('tblName');
 
 	var tableNames = element.children;
+
+	var tabNames = [];
 
 	tableLength = tableNames.length;
 
@@ -86,24 +84,60 @@ function validation()
 				tableNames[i].parentNode.appendChild(lineBreak);
 				tableNames[i].parentNode.appendChild(pargraph);
 				pargraph.innerText = 'You must enter a table name';
-
-				//tableNames[i].parentNode.innerHTML = tableNames[i].parentNode.innerHTML.concat('<br/><p class="error">You must enter a table name');
 			}
 			else
 			{
 				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
 
 				tab.classList.add('btn-danger');
-
-				//tab.parentNode.innerHTML = tab.parentNode.innerHTML.concat('<br/><p class="error">You must enter a table name');
 			}
 		}
 		else if(!isAlphaNumeric(tableNames[i].value))
 		{
 			valid = false;
 
-			tableNames[i].parentNode.innerHTML = tableNames[i].parentNode.innerHTML.concat('<br/><p class="error">"Table Name must be alphanumeric');
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				tableNames[i].parentNode.appendChild(lineBreak);
+				tableNames[i].parentNode.appendChild(pargraph);
+				pargraph.innerText = 'Table Name must be alphanumeric';
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+			}
 		}
+		else if(!isUniqueTable(tableNames[i].value, tabNames))
+		{
+			valid = false;
+
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				tableNames[i].parentNode.appendChild(lineBreak);
+				tableNames[i].parentNode.appendChild(pargraph);
+				pargraph.innerText = 'Table Name must be unique';
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+			}
+		}
+
+		tabNames.push(tableNames[i].value);
 	}
 
 	element = document.getElementById('field').children[1];
@@ -120,19 +154,67 @@ function validation()
 		{
 			valid = false;
 
-			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">You must enter a field name');
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				fields[i].firstElementChild.appendChild(lineBreak);
+				fields[i].firstElementChild.appendChild(pargraph);
+				pargraph.innerText = 'You must enter a field name';
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+			}
 		}
 		else if(!isAlphaNumeric(fieldName))
 		{
 			valid = false;
 
-			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Field Name must be alphanumeric');
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				fields[i].firstElementChild.appendChild(lineBreak);
+				fields[i].firstElementChild.appendChild(pargraph);
+				pargraph.innerText = 'Field name must be alphanumeric';
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+			}
 		}
 		else if(!isUniqueField(fieldName, names, tableNum))
 		{
 			valid = false;
 
-			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Field names must be unique within their table');
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				fields[i].firstElementChild.appendChild(lineBreak);
+				fields[i].firstElementChild.appendChild(pargraph);
+				pargraph.innerText = 'Field name must be unique within their table';
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+			}
 		}
 
 		names.push([tableNum, fieldName]);
@@ -145,7 +227,23 @@ function validation()
 		{
 			valid = false;
 
-			//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">A datatype must be selected');
+			if(tableNum == currentTable)
+			{
+				lineBreak = document.createElement('br');
+				pargraph = document.createElement('p');
+		
+		
+				pargraph.setAttribute('class', 'error');
+				fields[i].children[2].appendChild(lineBreak);
+				fields[i].children[2].appendChild(pargraph);
+				pargraph.innerText = 'A datatype must be selected';
+			}
+			else
+			{
+				tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+				tab.classList.add('btn-danger');
+			}
 		}
 
 		var foreign = fields[i].children[6].firstElementChild.checked;
@@ -158,7 +256,23 @@ function validation()
 			{
 				valid = false;
 
-				//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">A foreign key must be selected');
+				if(tableNum == currentTable)
+				{
+					lineBreak = document.createElement('br');
+					pargraph = document.createElement('p');
+			
+			
+					pargraph.setAttribute('class', 'error');
+					fields[i].children[7].appendChild(lineBreak);
+					fields[i].children[7].appendChild(pargraph);
+					pargraph.innerText = 'A related field must be selected';
+				}
+				else
+				{
+					tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+					tab.classList.add('btn-danger');
+				}
 			}
 		}
 	}
@@ -168,6 +282,8 @@ function validation()
 	for(var i = 0; i < tables.length; i++)
 	{
 		var records = tables[i].lastElementChild.children;
+
+		var tableNum = tables[i].id.substring(5);
 
 		var uniques = [];
 		var primaries = [];
@@ -194,26 +310,89 @@ function validation()
 				{
 					valid = false;
 
-					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be an Integer (Whole Number)');
+					if(tableNum == currentTable)
+					{
+						lineBreak = document.createElement('br');
+						pargraph = document.createElement('p');
+				
+				
+						pargraph.setAttribute('class', 'error');
+						input.parentNode.appendChild(lineBreak);
+						input.parentNode.appendChild(pargraph);
+						pargraph.innerText = 'Record must be an integer (Whole Number)';
+					}
+					else
+					{
+						tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+						tab.classList.add('btn-danger');
+					}
 				}
 				else if(input.classList.contains('decimal') && !/^\d+\.\d+$/.test(input.value) && input.value != '')
 				{
 					valid = false;
 
-					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be a Decimal');
+					if(tableNum == currentTable)
+					{
+						lineBreak = document.createElement('br');
+						pargraph = document.createElement('p');
+				
+				
+						pargraph.setAttribute('class', 'error');
+						input.parentNode.appendChild(lineBreak);
+						input.parentNode.appendChild(pargraph);
+						pargraph.innerText = 'Record must be a Deciaml';
+					}
+					else
+					{
+						tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+						tab.classList.add('btn-danger');
+					}
 				}
-				else if(input.classList.contains('date') && validatedate(input.value) && input.value != '')
+				else if(input.classList.contains('date') && !validatedate(input.value) && input.value != '')
 				{
 					valid = false;
 					
+					if(tableNum == currentTable)
+					{
+						lineBreak = document.createElement('br');
+						pargraph = document.createElement('p');
+				
+				
+						pargraph.setAttribute('class', 'error');
+						input.parentNode.appendChild(lineBreak);
+						input.parentNode.appendChild(pargraph);
+						pargraph.innerText = 'Record must be a date (YYYY-MM-DD)';
+					}
+					else
+					{
+						tab = document.getElementById('tbl'.concat(tableNum, '-button'));
 
-					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be a date (YYYY-MM-DD)');	
+						tab.classList.add('btn-danger');
+					}
 				}
-				else if(input.classList.contains('datetime') && !/\d{4}-[01]\d-[0-3]\d [0-2]\d:[0-5]\d:[0-5]\d/.test(input.value) && input.value != '')
+				else if(input.classList.contains('datetime') && (!/\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[1-9]|1[0-9]|2[0-3]):[0-5]\d:[0-5]\d/.test(input.value) || !validatedate(input.value.substring(0, 10))) && input.value != '')
 				{
 					valid = false;
 
-					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must have a date & time (YYYY-MM-DD HH:MM:SS)');	
+					if(tableNum == currentTable)
+					{
+						lineBreak = document.createElement('br');
+						pargraph = document.createElement('p');
+				
+				
+						pargraph.setAttribute('class', 'error');
+						input.parentNode.appendChild(lineBreak);
+						input.parentNode.appendChild(pargraph);
+						pargraph.innerText = 'Record must have a date & time (YYYY-MM-DD HH:MM:SS)';
+					}
+					else
+					{
+						tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+						tab.classList.add('btn-danger');
+					}
 				}
 
 				if(input.classList.contains('related'))
@@ -222,7 +401,23 @@ function validation()
 					{
 						valid = false;
 
-						//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record cannot be null');
+						if(tableNum == currentTable)
+						{
+							lineBreak = document.createElement('br');
+							pargraph = document.createElement('p');
+					
+					
+							pargraph.setAttribute('class', 'error');
+							input.parentNode.appendChild(lineBreak);
+							input.parentNode.appendChild(pargraph);
+							pargraph.innerText = 'Record cannot be null';
+						}
+						else
+						{
+							tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+							tab.classList.add('btn-danger');
+						}
 					}
 				}
 				else
@@ -231,7 +426,23 @@ function validation()
 					{
 						valid = false;
 
-						//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record cannot be null');
+						if(tableNum == currentTable)
+						{
+							lineBreak = document.createElement('br');
+							pargraph = document.createElement('p');
+					
+					
+							pargraph.setAttribute('class', 'error');
+							input.parentNode.appendChild(lineBreak);
+							input.parentNode.appendChild(pargraph);
+							pargraph.innerText = 'Record cannot be null';
+						}
+						else
+						{
+							tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+							tab.classList.add('btn-danger');
+						}
 					}
 				}
 
@@ -239,7 +450,23 @@ function validation()
 				{
 					valid = false;
 
-					//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Record must be unique');
+					if(tableNum == currentTable)
+					{
+						lineBreak = document.createElement('br');
+						pargraph = document.createElement('p');
+				
+				
+						pargraph.setAttribute('class', 'error');
+						input.parentNode.appendChild(lineBreak);
+						input.parentNode.appendChild(pargraph);
+						pargraph.innerText = 'Record must be unique';
+					}
+					else
+					{
+						tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+						tab.classList.add('btn-danger');
+					}
 				}
 
 				uniques[k].push(input.value);
@@ -254,7 +481,23 @@ function validation()
 			{
 				valid = false;
 
-				//element.parentNode.innerHTML = element.parentNode.innerHTML.concat('<br/><p class="error">Primary Key must be unique');
+				if(tableNum == currentTable)
+				{
+					lineBreak = document.createElement('br');
+					pargraph = document.createElement('p');
+			
+			
+					pargraph.setAttribute('class', 'error');
+					input.parentNode.parentNode.firstElementChild.appendChild(lineBreak);
+					input.parentNode.parentNode.firstElementChild.appendChild(pargraph);
+					pargraph.innerText = 'Primary Key must be unique';
+				}
+				else
+				{
+					tab = document.getElementById('tbl'.concat(tableNum, '-button'));
+
+					tab.classList.add('btn-danger');
+				}
 			}
 		}
 	}
@@ -356,39 +599,28 @@ function showErrors(value){
 }
 function validatedate(inputText)
 {
-  var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+  var dateformat = /\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])/
   
-  // Match the date format through regular expression
-  if(inputText.value.match(dateformat))
+  if(inputText.match(dateformat))
   {
-	  document.form1.text1.focus();
-	  //Test which seperator is used '/' or '-'
-	  var opera1 = inputText.value.split('/');
-	  var opera2 = inputText.value.split('-');
-	  lopera1 = opera1.length;
+	  var opera2 = inputText.split('-');
 	  lopera2 = opera2.length;
 
-	  // Extract the string into month, date and year
-	  if (lopera1>1)
+	  if (lopera2>1)
 	  {
-	  	var pdate = inputText.value.split('/');
-	  }
-	  else if (lopera2>1)
-	  {
-	  	var pdate = inputText.value.split('-');
+	  	var pdate = inputText.split('-');
 	  }
 
-	  var dd = parseInt(pdate[0]);
+	  var yy = parseInt(pdate[0]);
 	  var mm  = parseInt(pdate[1]);
-	  var yy = parseInt(pdate[2]);
-	  // Create list of days of a month [assume there is no leap year by default]
+	  var dd = parseInt(pdate[2]);
+
 	  var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 
 	  if (mm==1 || mm>2)
 	  {
 		  if (dd>ListofDays[mm-1])
 		  {
-		  	alert('Invalid date format!');
 		  	return false;
 		  }
 	  }
@@ -402,20 +634,18 @@ function validatedate(inputText)
 		  }
 		  if ((lyear==false) && (dd>=29))
 		  {
-		  	alert('Invalid date format!');
 		  	return false;
 		  }
 		  if ((lyear==true) && (dd>29))
 		  {
-		  	alert('Invalid date format!');
 		  	return false;
 		  }
 	  }
   }
   else
   {
-  	alert("Invalid date format!");
-  	document.form1.text1.focus();
   	return false;
   }
+
+  return true;
 }
