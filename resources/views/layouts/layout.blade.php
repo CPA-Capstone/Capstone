@@ -39,7 +39,12 @@
 
     <div class="container">
 
+    <form autocomplete="off" method="POST" action="/download" target="_blank">
+    {{ csrf_field() }}
+
       	@yield ('content')
+
+    </form>
 
     </div><!-- /.container -->
 

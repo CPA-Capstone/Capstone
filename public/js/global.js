@@ -7,6 +7,11 @@ var recordHTML = '<tr><td><input class="form-control" type="text" disabled></td>
 
 var reserved = "sqlite_";
 
+window.onbeforeunload = function() 
+{
+    return "Are you sure you want to leave the page; the database definition will be lost!";
+}
+
 /*var keyWords = ["ABORT",
     "ACTION",
     "ADD",

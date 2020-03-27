@@ -112,14 +112,14 @@
             <tr>
                 <td width="30%"></td>
                 <td width="20%" align="left"><button id="btn_generate" type="button" class="btn btn-blue" disabled="" onclick="generateSQL();">Generate</button></td>
-                <form method="POST" action="/download" target="_blank">
-                {{ csrf_field() }}
+                {{-- <form method="POST" action="/download" target="_blank">
+                {{ csrf_field() }} --}}
                     <td width="20%" align="right">
                         <input id="sql" name="sql" type="hidden">
                         <input id="DBname" name="DBname" type="hidden">
                         <input id="btn_download" type="submit" class="btn btn-blue" value="Download" disabled>
                     </td>
-                </form>
+                {{-- </form> --}}
                 <td width="30%" align="right"><button type="button" class="btn btn-info btn-circle" onclick="makeDatabaseHelp()"><b>?</b></button></td>
             </tr>
          </div>            
