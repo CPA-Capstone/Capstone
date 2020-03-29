@@ -21,9 +21,9 @@ class DataController extends Controller
 
         $myPDO->exec($sql);
 
-        if($myPDO->errorInfo()[0] == 0)
+        if($myPDO->errorInfo()[0] == "00000")
         {
-        	//dd($myPDO->errorInfo());
+        	dd($myPDO->errorInfo());
 
 	        $file = public_path() . "/data/" . $dbName . ".sqlite";
 
@@ -41,7 +41,7 @@ class DataController extends Controller
 	    {
 	    	//Query Fails
 
-	    	dd($myPDO->errorInfo());
+	    	//dd($myPDO->errorInfo());
 	    }
     }    
 }
