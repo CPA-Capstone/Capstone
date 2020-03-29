@@ -32,21 +32,48 @@
   <body>
 
     <div class="blog-masthead" style="text-align: center;">
-
-        <h4 class="nav-header">Online Database Builder</h4>
-
-    </div>
-
-    <div class="container">
-
+      <table>
+        <tr>
+          <td><h4 class="nav-header">Online Database Builder</h4></td>
+          <td><ul class="nav-header" margin="right">
+            <!-- Authentication Links -->
+            @if (Auth::guest())
+                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('register') }}">Register</a>
+            @else
+                <li class="dropdown">
+                    <a href="#" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+  
+                    
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+  
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                      
+                    </ul>
+                </li>
+            @endif
+        </ul></td>
+        
+    </tr>
+    </table>
+        
+        
+    </div> 
     <form autocomplete="off" method="POST" action="/download" target="_blank">
-    {{ csrf_field() }}
+      {{ csrf_field() }}
+  
+          @yield ('content')
+  
+      </form>
 
-      	@yield ('content')
-
-    </form>
-
-    </div><!-- /.container -->
 
     <footer class="blog-footer">
       <p>&copy;Online Database Builder</p>

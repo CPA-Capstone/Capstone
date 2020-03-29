@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::post('/download', 'DataController@load');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

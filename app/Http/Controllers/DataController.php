@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\Errors;
+use Illuminate\Console\ConfirmableTrait;
 
 class DataController extends Controller
 {
+	
 	public function load(Request $request)
     {
+		
     	$files = glob(public_path() . '/data/*');
 		foreach($files as $f)
 		{
@@ -40,7 +44,7 @@ class DataController extends Controller
 	    else
 	    {
 	    	//Query Fails
-
+			
 	    	//dd($myPDO->errorInfo());
 	    }
     }    

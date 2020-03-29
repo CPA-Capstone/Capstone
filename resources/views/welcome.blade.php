@@ -115,10 +115,15 @@
                 {{-- <form method="POST" action="/download" target="_blank">
                 {{ csrf_field() }} --}}
                     <td width="20%" align="right">
-                        <input id="sql" name="sql" type="hidden">
+                        <input id="sql" name="sql" type="hidden" value="asdasd">
                         <input id="DBname" name="DBname" type="hidden">
-                        <input id="btn_download" type="submit" class="btn btn-blue" value="Download" disabled>
+                        <input id="btn_download" type="submit" class="btn btn-blue" value="Download" >
+                        <script>
+                            confirm("There was an error! Would you like to send us the error info? This will send us the information from your database."));
+                        </script>
+
                     </td>
+                    
                 {{-- </form> --}}
                 <td width="30%" align="right"><button type="button" class="btn btn-info btn-circle" onclick="makeDatabaseHelp()"><b>?</b></button></td>
             </tr>
