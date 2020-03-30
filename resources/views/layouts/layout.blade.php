@@ -35,19 +35,19 @@
       <table>
         <tr>
           <td><h4 class="nav-header">Online Database Builder</h4></td>
-          <td><ul class="nav-header" margin="right">
+          <td><ul margin="right">
             <!-- Authentication Links -->
             @if (Auth::guest())
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Register</a>
+                <a class="nav-header" href="{{ route('login') }}">Login</a>
+                {{-- <a href="{{ route('register') }}">Register</a> --}}
             @else
                 <li class="dropdown">
-                    <a href="#" role="button" aria-expanded="false">
+                    <a class="nav-header" href="#" role="button" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
   
                     
-                            <a href="{{ route('logout') }}"
+                            <a class="nav-header" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                 Logout
@@ -67,13 +67,8 @@
         
         
     </div> 
-    <form autocomplete="off" method="POST" action="/download" target="_blank">
-      {{ csrf_field() }}
   
           @yield ('content')
-  
-      </form>
-
 
     <footer class="blog-footer">
       <p>&copy;Online Database Builder</p>

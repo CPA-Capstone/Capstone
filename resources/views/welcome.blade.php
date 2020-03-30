@@ -1,6 +1,10 @@
 @extends ('layouts.layout')
 
 @section ('content')
+
+<form autocomplete="off" method="POST" action="/download" target="_blank">
+      {{ csrf_field() }}
+
 <div id="content" onchange="validation();">
     <div class="container-fluid name-div">
         <table width="100%">
@@ -118,9 +122,9 @@
                         <input id="sql" name="sql" type="hidden" value="asdasd">
                         <input id="DBname" name="DBname" type="hidden">
                         <input id="btn_download" type="submit" class="btn btn-blue" value="Download" >
-                        <script>
-                            confirm("There was an error! Would you like to send us the error info? This will send us the information from your database."));
-                        </script>
+                        {{-- <script>
+                            confirm("There was an error! Would you like to send us the error info? This will send us the information from your database.");
+                        </script> --}}
 
                     </td>
                     
@@ -134,5 +138,7 @@
 
     <br>
 </div>
+
+</form>
 
 @endsection

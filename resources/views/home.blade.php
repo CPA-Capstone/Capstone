@@ -16,7 +16,7 @@
                         </div>
                     @endif
 
-                    <table>
+                    <table class="table">
                         <tr>
                           <td><h5>Error ID</h5></td>
                           <td><h5>Error Message</h5></td>

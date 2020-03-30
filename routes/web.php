@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/report', 'DataController@store');
 Route::post('/download', 'DataController@load');
 
 Auth::routes();

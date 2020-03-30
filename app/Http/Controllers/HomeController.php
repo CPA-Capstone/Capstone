@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $errors = \App\Error::all();
+
+        return view('home', compact(['errors']));
     }
 }

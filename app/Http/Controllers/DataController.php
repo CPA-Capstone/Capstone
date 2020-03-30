@@ -25,9 +25,11 @@ class DataController extends Controller
 
         $myPDO->exec($sql);
 
+        $PDOerror = $myPDO->errorInfo()[2];
+
         if($myPDO->errorInfo()[0] == "00000")
         {
-        	dd($myPDO->errorInfo());
+        	//dd($myPDO->errorInfo());
 
 	        $file = public_path() . "/data/" . $dbName . ".sqlite";
 
@@ -43,9 +45,22 @@ class DataController extends Controller
 	    }
 	    else
 	    {
-	    	//Query Fails
-			
-	    	//dd($myPDO->errorInfo());
+	    	return view('error', compact(['sql', 'PDOerror']));
 	    }
-    }    
+    }
+
+    public function store(Request $request)
+    {
+    	$error = new \App\Error;
+
+    	$error->errorSQL = ' ';
+    	$error->errorMessage = $request->get('error');
+    	$error->errorStatus = 'u';
+    	$error->timestamps = false;
+    	$error->save();
+
+    	//Send email here
+
+    	return view('success');
+    }
 }
